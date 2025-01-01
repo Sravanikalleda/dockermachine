@@ -1,9 +1,22 @@
-# dockermachine
-FROM httpd
-RUN apt update
-RUN apt install git -y
-RUN rm -rf /var/lib/apt/lists/*
-RUN rm -rf /usr/local/apache2/htdocs/*
-RUN git clone https://github.com/akshu20791/apachewebsite/ /usr/local/apache2/htdocs/
-EXPOSE 80
-CMD ["httpd-foreground"]
+# Client/Server docker-compose example
+You need to use ubuntu machine in aws 
+and clone this repo .
+after that just build and launch. if you see Docker compose is magic it means your app is working
+
+## How to run ?
+
+The project launch is in two parts: build and start.
+
+### Build
+
+```
+$ docker-compose build
+```
+
+### Launch
+
+```
+$ docker-compose up
+```
+
+

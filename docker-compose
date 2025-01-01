@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    image: your-app-image:latest  # Replace with the actual image of your app
+    container_name: app-container
+    ports:
+      - "8080:80"  # Map port 8080 on the host to port 80 inside the container
+    environment:
+      - MYSQL_HOST=db  # Name of the MySQL service, which is `db` here
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=rootpassword
+      - MYSQL_DATABASE=myappdb
+    depends_on:
+      - db  # Wait for the MySQL service to be ready before starting the app
+
+  db:
+    image: mysql:8.0  # Use the official MySQL image
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: myappdb
+    ports:
+      - "3306:3306"  # Expose MySQL port to the host (optional)
+    volumes:
+      - db_data:/var/lib/mysql  # Persist database data
+
+volumes:
+  db_data:
+    driver: local  # Define volume for MySQL data persistence
